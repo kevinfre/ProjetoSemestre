@@ -1,46 +1,43 @@
 package org.example;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+
+import java.io.Console;
+import java.util.Scanner;
 
 
 public class App 
 {
-    public static void main( String[] args )
-    {
-        Connection conn = null;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-
-            String user = "root";
-            String psw = "root";
-
-            conn = DriverManager.getConnection(url,user,psw);
-
-            String sql = "INSERT INTO `controleFrequencia`.`alunos`\n" +
-                    "(`tia`,\n" +
-                    "`horaEntrada`,\n" +
-                    "`horaSaida`)\n" +
-                    "VALUES\n" +
-                    "(31706525, '7:00', '11:00');";
-            PreparedStatement pstm = conn.prepareStatement(sql);
+    public static void main( String[] args ) {
+        int opcao = 0;
+        Scanner entrada = new Scanner(System.in);
+        do {
+            System.out
+                    .println("\n\n### C.R.U.D --> PRODUTO & APLICATIVO ###");
+            System.out.println("\n                  =========================");
+            System.out.println("                  |     1 - PRODUTO         |");
+            System.out.println("                  |     2 - APLICATIVO      |");
+            System.out.println("                  |     0 - Sair            |");
+            System.out.println("                  =========================\n");
 
 
-            int rs = pstm.executeUpdate();
+            System.out.print("\n");
+            switch (opcao) {
+                case 1:
+                    break;
+                case 2:
 
-            conn.close();
+                    break;
 
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+                case 5:
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println("Opção Inválida!");
+                    break;
+            }
+        } while (opcao != 0);
+
 
     }
 }

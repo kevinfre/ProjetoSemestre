@@ -17,13 +17,26 @@ public class ConexãoDB {
             try {
                 conn = DriverManager.getConnection(url, user, password);
             } catch (SQLException ex) {
-                // log an exception. fro example:
-                System.out.println("Failed to create the database connection.");
+
+                System.out.println("Falha em criar conexão com database.");
             }
         } catch (ClassNotFoundException ex) {
             // log an exception. for example:
-            System.out.println("Driver not found.");
+            System.out.println("Driver não encontrado.");
         }
         return conn;
+    }
+
+    public void close() {
+        if (this.conn != null) {
+            try {
+                this.conn.close();
+            } catch (Exception var2) {
+                var2.printStackTrace();
+            }
+
+            this.conn = null;
+        }
+
     }
 }
