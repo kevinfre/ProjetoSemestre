@@ -13,27 +13,32 @@ public class Produto {
         this.preço = preço;
     }
 
-    public String getDescrição() {
+    public Produto(){
+
+    }
+
+
+    public  String getDescrição() {
         return descrição;
     }
 
-    public void setDescrição(String descrição) {
+    public  void setDescrição(String descrição) {
         this.descrição = descrição;
     }
 
-    public int getId() {
+    public  int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public  void setId(int id) {
         this.id = id;
     }
 
-    public String getMarca() {
+    public  String getMarca() {
         return marca;
     }
 
-    public void setMarca(String marca) {
+    public  void setMarca(String marca) {
         this.marca = marca;
     }
 
@@ -41,7 +46,7 @@ public class Produto {
         return preço;
     }
 
-    public void setPreço(int preço) {
+    public  void setPreço(int preço) {
         this.preço = preço;
     }
 }
