@@ -131,6 +131,54 @@ public class InterfaceUsuario {
         }
     }
 
+    private void UpdateAplicativo() {
+      List<Aplicativo> alunos = daoAplicativo.read();
+
+      while (true) {
+          System.out.println("\n***********************************");
+          System.out.println("*** Lista de Alunos\\ Cadastrados ***");
+          System.out.println("***********************************");
+          int i = 0;
+          for (Aplicativo aluno : alunos) {
+              System.out.println(i + " - " + aluno);
+              i++;
+          }
+          System.out.println(i + " - Cancelar operação");
+
+          System.out.print("Qual aluno deseja alterar ?");
+          int opc = entrada.nextInt();
+          //Necessário para ler a quebra de linha (enter)
+          entrada.nextLine();
+
+          if (opc==i) {
+              // Cancelar operação
+              break;
+          }
+
+          if (opc >= alunos.size() || opc < 0) {
+              System.out.println("Esta opção não é válida");
+          } else {
+
+              System.out.print("Informe o NOME do aplicativo: ");
+              alunos.get(opc).setNome(entrada.nextLine());
+
+              System.out.print("Informe o DESENVOLVEDOR do aplicativo: ");
+              alunos.get(opc).setDesenvolvedor(entrada.nextLine());
+
+              System.out.println("Informe o número de DOWNLOADS do aplicativo: ");
+              alunos.get(opc).setDownloads(entrada.nextInt());
+
+              if (daoAplicativo.update(alunos.get(opc))) {
+                  System.out.println("Aluno " + alunos.get(opc).getNome() +
+                          " alterado com sucesso");
+              } else {
+                  System.out.println("OPS: falar ao tentar alterar");
+              }
+              //Isso para o while infinito
+              break;
+          }
+      }
+  }
     private void deleteAplicativo() {
         List<Aplicativo> alunos = daoAplicativo.read();
 
