@@ -8,7 +8,9 @@ import java.util.Scanner;
 public class App 
 {
     public static void main( String[] args ) {
-        InterfaceUsuario interfaceUsuario = new InterfaceUsuario(mysqlDAO);
-
+        AplicativoDAOMySQL aplicativoDao = new AplicativoDAOMySQL();
+        ProdutoDAOMySQL produtoDao = new ProdutoDAOMySQL();
+        InterfaceUsuario interfaceUsuario = new InterfaceUsuario(produtoDao, aplicativoDao);
+        interfaceUsuario.iniciar();
     }
 }

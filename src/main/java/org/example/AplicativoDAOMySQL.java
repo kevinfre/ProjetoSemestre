@@ -61,6 +61,7 @@ public class AplicativoDAOMySQL implements AplicativoDAO {
             PreparedStatement stm = conexao.prepareStatement(readSQL);
             ResultSet rs = stm.executeQuery();
 
+
             while (rs.next()) {
                 Aplicativo aplicativo = new Aplicativo();
 
@@ -68,9 +69,13 @@ public class AplicativoDAOMySQL implements AplicativoDAO {
                 aplicativo.setNome(rs.getString("nome"));
                 aplicativo.setDesenvolvedor(rs.getString("desenvolvedor"));
                 aplicativo.setDownloads(rs.getInt("downloads"));
+                aplicativos.add(aplicativo);
+
+                System.out.println("--ID--: " +aplicativo.id + "\n Nome: " + aplicativo.nome + "\n Desenvolvedor: " +
+                        aplicativo.desenvolvedor + "\n Downloads: " + aplicativo.downloads);
             }
 
-            return aplicativos;
+
 
         } catch (final SQLException ex) {
             System.out.println("Falha de conexão com a base de dados!");

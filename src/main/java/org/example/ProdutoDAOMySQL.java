@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProdutoDAOMySQL {
+public class ProdutoDAOMySQL implements ProdutoDAO {
     private String createSQL = "INSERT INTO Produto VALUES (?, ?, ?, ?)";
     private String readSQL = "SELECT * FROM Produto";
     private String updateSQL = "UPDATE Produto SET id=?, descricao=?, marca=?, preco=? WHERE id=?";
@@ -59,14 +59,16 @@ public class ProdutoDAOMySQL {
             while (rs.next()) {
                 Produto produto = new Produto();
 
+                produto.setId(rs.getInt("id"));
+                produto.setDescrição(rs.getString("descricao"));
+                produto.setMarca(rs.getString("marca"));
+                produto.setPreço(rs.getInt("preco"));
+                produtos.add(produto);
 
-                Produto.setId(rs.getInt("id"));
-                Produto.setDescrição(rs.getString("descricao"));
-                Produto.setMarca(rs.getString("marca"));
-                Produto.setPreço(rs.getInt("preco"));
+                System.out.println("--ID--"+ produto.id + "\n Descrição: " + produto.descrição +
+                        "\n Marca: " + produto.marca + "\n Preço: " + produto.preço);
             }
 
-            return produtos;
 
         } catch (final SQLException ex) {
             System.out.println("Falha de conexão com a base de dados!");
@@ -91,10 +93,10 @@ public class ProdutoDAOMySQL {
             PreparedStatement stm = conexao.prepareStatement(updateSQL);
 
 
-            stm.setInt(1, Produto.getId() );
-            stm.setString(2, Produto.getDescrição());
-            stm.setString(3, Produto.getMarca());
-            stm.setInt(4, Produto.getPreço());
+            stm.setInt(1, produto.getId() );
+            stm.setString(2, produto.getDescrição());
+            stm.setString(3, produto.getMarca());
+            stm.setInt(4, produto.getPreço());
 
             int registros = stm.executeUpdate();
 
@@ -124,7 +126,7 @@ public class ProdutoDAOMySQL {
 
             //Inicializando os valores
             // cuidado com a ordem, eh diferente do insert
-            stm.setInt(1, Produto.getId());
+            stm.setInt(1, produto.getId());
 
             int registros = stm.executeUpdate();
 
