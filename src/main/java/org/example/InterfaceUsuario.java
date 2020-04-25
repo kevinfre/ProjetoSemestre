@@ -317,7 +317,55 @@ public class InterfaceUsuario {
 
     private void updateProduto(){
 
-    }
+      while (true) {
+          System.out.println("\n***********************************");
+          System.out.println("*** Lista de Produtos Cadastrados ***");
+          System.out.println("***********************************");
+
+          List<Produto> produtos = daoProduto.read();
+          System.out.print("Qual produto deseja alterar? ");
+          int opc = entrada.nextInt();
+          //Necessário para ler a quebra de linha (enter)
+          entrada.nextLine();
+
+
+          if (opc >= produtos.size() || opc < 0) {
+              System.out.println("Esta opção não é válida");
+              System.out.println("Cancelar operação? (Sim = 1, Não = 0)");
+              int opc2 = entrada.nextInt();
+              if (opc2 == 0){
+                  uptadeProduto();
+              } else {
+                  break;
+              }
+          } else {
+
+            System.out.print("\nInforme o ID do produto: ");
+            produto.get(opc).setId(entrada.nextInt());
+
+
+            System.out.print("Informe a DESCRIÇÃO do produto: ");
+          produto.get(opc).setDescrição(entrada.next());
+
+            System.out.print("Informe a MARCA do produto: ");
+            produto.get(opc).setMarca(entrada.next());
+
+            System.out.println("Informe o preço do produto: ");
+            produto.get(opc).setPreço(entrada.nextInt());
+
+
+              if (daoProduto.update(produtos.get(opc))) {
+                  System.out.println("Produto " + produtos.get(opc).getMarca() +
+                          " alterado com sucesso");
+              } else {
+                  System.out.println("OPS: falar ao tentar alterar");
+              }
+              //Isso para o while infinito
+              break;
+          }
+      }
+
+  }
 
 
 
